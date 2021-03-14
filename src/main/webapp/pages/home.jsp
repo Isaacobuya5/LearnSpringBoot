@@ -6,6 +6,6 @@
 <title>My Home Page</title>
 </head>
 <body>
-Welcome ${name}
+Welcome ${obj.aid}, ${obj.aname}, ${obj.lang}
 </body>
 </html>

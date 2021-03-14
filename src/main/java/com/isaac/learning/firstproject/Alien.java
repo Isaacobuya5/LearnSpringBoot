@@ -1,7 +1,6 @@
 package com.isaac.learning.firstproject;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,10 +9,10 @@ public class Alien {
 
     private int aid;
     private String aname;
-    private String tech;
+    private String lang;
 
-    @Autowired
-    private Laptop laptop;
+//    @Autowired
+//    private Laptop laptop;
 
     public Alien() {
         super();
@@ -37,24 +36,24 @@ public class Alien {
         this.aname = aname;
     }
 
-    public String getTech() {
-        return tech;
+    public String getLang() {
+        return lang;
     }
 
-    public void setTech(String tech) {
-        this.tech = tech;
+    public void setLang(String lang) {
+        this.lang = lang;
     }
+//
+//    public Laptop getLaptop() {
+//        return laptop;
+//    }
+//
+//    public void setLaptop(Laptop laptop) {
+//        this.laptop = laptop;
+//    }
 
-    public Laptop getLaptop() {
-        return laptop;
-    }
-
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
-    }
-
-    public void showObject() {
-        System.out.println("Show object");
-        laptop.compile();
-    }
+//    public void showObject() {
+//        System.out.println("Show object");
+//        laptop.compile();
+//    }
 }
