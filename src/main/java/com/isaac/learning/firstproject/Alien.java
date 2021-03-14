@@ -1,15 +1,19 @@
 package com.isaac.learning.firstproject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope(value = "prototype")
+//@Scope(value = "prototype")
 public class Alien {
 
     private int aid;
     private String aname;
     private String tech;
+
+    @Autowired
+    private Laptop laptop;
 
     public Alien() {
         super();
@@ -41,7 +45,16 @@ public class Alien {
         this.tech = tech;
     }
 
+    public Laptop getLaptop() {
+        return laptop;
+    }
+
+    public void setLaptop(Laptop laptop) {
+        this.laptop = laptop;
+    }
+
     public void showObject() {
         System.out.println("Show object");
+        laptop.compile();
     }
 }

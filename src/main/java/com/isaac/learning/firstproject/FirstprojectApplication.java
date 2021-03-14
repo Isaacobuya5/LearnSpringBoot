@@ -20,13 +20,16 @@ public class FirstprojectApplication {
 		 * Using prototype does not create an instance of an object by default for you but rather creates it when needed
 		 * We mark the class with @Scope(value="prototype") to enable the prototype scope.
 		 *
+		 * We use @Autowire annotation to connect 2 beans together
+		 * The object marked with @Autowired is automatically injected ito our application
+		 * NOTE; - the object marked with @Autowired is searched based on name and not type i.e. Laptop.class
+		 * To search by name, we add one more annotation after @Autowired i.e. "Qualifier("laptop")
+		 * Then in the object class itself, use "@Component(name="laptop")
+		 *
 		 */
 		ConfigurableApplicationContext context = SpringApplication.run(FirstprojectApplication.class, args);
 		Alien alien = context.getBean(Alien.class);
 		alien.showObject();
-
-		Alien alien1 = context.getBean(Alien.class);
-		alien1.showObject();
 	}
 
 }
