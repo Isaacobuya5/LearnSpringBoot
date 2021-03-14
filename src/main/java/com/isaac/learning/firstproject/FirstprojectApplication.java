@@ -1,11 +1,14 @@
 package com.isaac.learning.firstproject;
 
+import com.isaac.learning.firstproject.controllers.HomeController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class FirstprojectApplication {
+
 
 	public static void main(String[] args) {
 		/**
@@ -27,9 +30,9 @@ public class FirstprojectApplication {
 		 * Then in the object class itself, use "@Component(name="laptop")
 		 *
 		 */
-		ConfigurableApplicationContext context = SpringApplication.run(FirstprojectApplication.class, args);
-		Alien alien = context.getBean(Alien.class);
-		alien.showObject();
+		SpringApplication.run(FirstprojectApplication.class, args);
+//		ConfigurableApplicationContext context = SpringApplication.run(FirstprojectApplication.class, args);
+//		Alien alien = context.getBean(Alien.class);
+//		alien.showObject();
 	}
-
 }
