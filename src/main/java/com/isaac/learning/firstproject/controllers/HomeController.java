@@ -1,25 +1,48 @@
 package com.isaac.learning.firstproject.controllers;
 
-import com.isaac.learning.firstproject.Alien;
+import com.isaac.learning.firstproject.model.Alien;
+import com.isaac.learning.firstproject.repository.AlienRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 
 @Controller
 public class HomeController {
 
-    @RequestMapping("home")
-    public ModelAndView home(Alien alien) {
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("obj", alien);
-        mv.setViewName("home");
+    @Autowired
+    AlienRepository alienRepo;
+
+    @RequestMapping("/")
+    public String home() {
+        return "home";
+    }
+
+    @RequestMapping("/addAlien")
+    public String addAlien(Alien alien) {
+        alienRepo.save(alien);
+        return "home";
+    }
+
+    @RequestMapping("/getAlien")
+    public ModelAndView getAlien(@RequestParam("aid") String id){
+        ModelAndView mv = new ModelAndView("showAlien");
+        Alien alien = alienRepo.findById(Integer.parseInt(id)).orElse(new Alien());
+        mv.addObject(alien);
+        System.out.println(alienRepo.findByLang("java"));
+        System.out.println(alienRepo.findByAidGreaterThan(Integer.parseInt(id)));
+        System.out.println(alienRepo.findByLangSorted("java"));
         return mv;
     }
+//    @RequestMapping("home")
+//    public ModelAndView home(Alien alien) {
+//        ModelAndView mv = new ModelAndView();
+//        mv.addObject("obj", alien);
+//        mv.setViewName("home");
+//        return mv;
+//    }
 
     // passing a single value
 //    @RequestMapping("home")

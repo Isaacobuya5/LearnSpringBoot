@@ -6,6 +6,16 @@
 <title>My Home Page</title>
 </head>
 <body>
-Welcome ${obj.aid}, ${obj.aname}, ${obj.lang}
+<form action="addAlien">
+<input type="text" name="aid" placeholder="Alien ID"><br>
+<input type="text" name="aname" placeholder="Alien Name"><br>
+<input type="text" name="lang" placeholder="Alien language"><br>
+<input type="submit"><br>
+</form>
+
+<form action="getAlien">
+<input type="text" name="aid" placeholder="Alien ID"><br>
+<input type="submit"><br>
+</form>
 </body>
 </html>

@@ -1,18 +1,23 @@
-package com.isaac.learning.firstproject;
+package com.isaac.learning.firstproject.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
-//@Scope(value = "prototype")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Alien {
 
+    @Id
     private int aid;
-    private String aname;
-    private String lang;
 
-//    @Autowired
-//    private Laptop laptop;
+    @Column(name = "name", nullable = false)
+    private String aname;
+
+    @Column(name = "lang", nullable = false)
+    private String lang;
 
     public Alien() {
         super();
@@ -43,17 +48,9 @@ public class Alien {
     public void setLang(String lang) {
         this.lang = lang;
     }
-//
-//    public Laptop getLaptop() {
-//        return laptop;
-//    }
-//
-//    public void setLaptop(Laptop laptop) {
-//        this.laptop = laptop;
-//    }
 
-//    public void showObject() {
-//        System.out.println("Show object");
-//        laptop.compile();
-//    }
+    @Override
+    public String toString() {
+        return "[aid=" + aid + ", aname=" + aname + ", lang=" + lang + "]";
+    }
 }
