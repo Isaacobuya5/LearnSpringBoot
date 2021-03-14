@@ -4,8 +4,10 @@ import com.isaac.learning.firstproject.model.Alien;
 import com.isaac.learning.firstproject.repository.AlienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -36,6 +38,19 @@ public class HomeController {
         System.out.println(alienRepo.findByLangSorted("java"));
         return mv;
     }
+
+    @RequestMapping("/aliens")
+    @ResponseBody
+    public String getAliens() {
+        return alienRepo.findAll().toString();
+    }
+
+    @RequestMapping("/aliens/{aid}")
+    @ResponseBody
+    public String fetchAlien(@PathVariable("aid") Integer aid) {
+        return alienRepo.findById(aid).toString();
+    }
+
 //    @RequestMapping("home")
 //    public ModelAndView home(Alien alien) {
 //        ModelAndView mv = new ModelAndView();

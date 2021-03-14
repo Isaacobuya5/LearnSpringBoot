@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class Alien {
 
     @Id
-    private int aid;
+    private Integer aid;
 
     @Column(name = "name", nullable = false)
     private String aname;
@@ -25,11 +25,11 @@ public class Alien {
         System.out.println("Object created");
     }
 
-    public int getAid() {
+    public Integer getAid() {
         return aid;
     }
 
-    public void setAid(int aid) {
+    public void setAid(Integer aid) {
         this.aid = aid;
     }
 
