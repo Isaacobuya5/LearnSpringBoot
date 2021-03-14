@@ -4,51 +4,75 @@ import com.isaac.learning.firstproject.model.Alien;
 import com.isaac.learning.firstproject.repository.AlienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+import java.util.Optional;
 
-@Controller
+
+@RestController
 public class HomeController {
 
     @Autowired
     AlienRepository alienRepo;
 
-    @RequestMapping("/")
-    public String home() {
-        return "home";
+//    @RequestMapping("/")
+//    public String home() {
+//        return "home";
+//    }
+//
+//    @RequestMapping("/addAlien")
+//    public String addAlien(Alien alien) {
+//        alienRepo.save(alien);
+//        return "home";
+//    }
+//
+//    @RequestMapping("/getAlien")
+//    public ModelAndView getAlien(@RequestParam("aid") String id){
+//        ModelAndView mv = new ModelAndView("showAlien");
+//        Alien alien = alienRepo.findById(Integer.parseInt(id)).orElse(new Alien());
+//        mv.addObject(alien);
+//        System.out.println(alienRepo.findByLang("java"));
+//        System.out.println(alienRepo.findByAidGreaterThan(Integer.parseInt(id)));
+//        System.out.println(alienRepo.findByLangSorted("java"));
+//        return mv;
+//    }
+
+//@RequestMapping(path="/aliens",produces = {"application/xml"})
+//    @ResponseBody
+//    public List<Alien> getAliens() {
+//        return alienRepo.findAll();
+//    }
+
+    @GetMapping(path="/aliens")
+    public List<Alien> getAliens() {
+        return alienRepo.findAll();
     }
 
-    @RequestMapping("/addAlien")
-    public String addAlien(Alien alien) {
+    @GetMapping("/aliens/{aid}")
+    public Optional<Alien> fetchAlien(@PathVariable("aid") Integer aid) {
+        return alienRepo.findById(aid);
+    }
+
+    @DeleteMapping("/alien/{aid}")
+    public String deleteAlien(@PathVariable Integer aid) {
+        // first get the alien with that id
+        Alien alien = alienRepo.getOne(aid);
+        alienRepo.delete(alien);
+        return "deleted";
+    }
+
+    @PostMapping(path="/alien",consumes = {"application/json"})
+    public Alien addAlien(@RequestBody Alien alien) {
         alienRepo.save(alien);
-        return "home";
+        return alien;
     }
 
-    @RequestMapping("/getAlien")
-    public ModelAndView getAlien(@RequestParam("aid") String id){
-        ModelAndView mv = new ModelAndView("showAlien");
-        Alien alien = alienRepo.findById(Integer.parseInt(id)).orElse(new Alien());
-        mv.addObject(alien);
-        System.out.println(alienRepo.findByLang("java"));
-        System.out.println(alienRepo.findByAidGreaterThan(Integer.parseInt(id)));
-        System.out.println(alienRepo.findByLangSorted("java"));
-        return mv;
-    }
-
-    @RequestMapping("/aliens")
-    @ResponseBody
-    public String getAliens() {
-        return alienRepo.findAll().toString();
-    }
-
-    @RequestMapping("/aliens/{aid}")
-    @ResponseBody
-    public String fetchAlien(@PathVariable("aid") Integer aid) {
-        return alienRepo.findById(aid).toString();
+    @PutMapping(path="/alien",consumes = {"application/json"})
+    public Alien saveOrUpdate(@RequestBody Alien alien) {
+        alienRepo.save(alien);
+        return alien;
     }
 
 //    @RequestMapping("home")
@@ -80,5 +104,12 @@ public class HomeController {
 //         */
 //        return "home";
 //    }
+
+    /**
+     * Avoid this class by using spring data rest
+     * Mark repository class with
+     * @RepositoryRestResource(collectionResourceRel="alien",path="alien")
+     *
+     */
 
 }

@@ -1,1 +1,1 @@
-insert into alien values(1, "Isaac Obuya", "Java");
+insert into alien values(1, 'Isaac Obuya', 'Java');

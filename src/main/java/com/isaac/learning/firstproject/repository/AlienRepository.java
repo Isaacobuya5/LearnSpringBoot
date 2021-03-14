@@ -1,12 +1,13 @@
 package com.isaac.learning.firstproject.repository;
 
 import com.isaac.learning.firstproject.model.Alien;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface AlienRepository  extends CrudRepository<Alien, Integer> {
+public interface AlienRepository  extends JpaRepository<Alien, Integer> {
 
     List<Alien> findByLang(String tech);
 
